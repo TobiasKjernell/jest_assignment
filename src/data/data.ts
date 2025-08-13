@@ -21,7 +21,7 @@ const thirdRoundQuizSet: IQuizSet = {
 const fourthRoundQuizSet: IQuizSet = {
     question: "Coffee beans aren't actually beans. What is it?",
     answer: 1,
-    alternatives: ['A cheery', 'A seed from a cheery', 'A berry  ', 'Fermented panda']
+    alternatives: ['A cherry', 'A seed from a cherry', 'A berry  ', 'Fermented panda']
 }
 
 const fifthRoundQuizSet: IQuizSet = {

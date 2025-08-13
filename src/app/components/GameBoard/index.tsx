@@ -31,7 +31,7 @@ const GameBoard = ({ player }: { player: string }): ReactElement => {
 
     return (
 
-        <main className="w-[400px] h-[600px] bg-pink-800 text-pink-200">
+        <main className="w-[400px] h-[600px] bg-pink-800 text-pink-200 shadow-2xl shadow-black">
             <GameHeader player={player} />
             {gameQuiz.length === step ?
                 <>
