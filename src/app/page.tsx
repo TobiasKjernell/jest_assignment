@@ -2,20 +2,16 @@
 
 import { useState } from "react";
 import CreatePlayer from "./components/CreatePlayer";
+import GameBoard from "./components/GameBoard";
 
 export default function Home() {
   const [player, setPlayer] = useState<string>('')
 
-  const handleSetPlayer = (s: string) => setPlayer(s);
+  const handleSetPlayer = (inputValue: string) => setPlayer(inputValue);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-
-      {!player ? <CreatePlayer setPlayer={handleSetPlayer} />
-        : <main className="w-[400px] h-[600px] bg-amber-700">
-          <div>hello</div>
-          <div>hello</div>
-        </main>}
+      {!player ? <CreatePlayer setPlayer={handleSetPlayer} /> : <GameBoard player={player} />}
     </div>
   );
 }

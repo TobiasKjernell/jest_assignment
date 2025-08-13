@@ -1,0 +1,27 @@
+import { gameQuiz } from "@/data/data";
+import { IQuizSet } from "@/interfaces/interfaces";
+import { ReactElement } from "react";
+
+interface IQuizArea {
+    gameQuiz: IQuizSet[],
+    step: number,
+    answer: boolean,
+    onClick: (s:number) => void 
+}
+
+const QuizArea = ({ answer, step, gameQuiz, onClick }: IQuizArea): ReactElement => {
+    return (
+        <>
+            <h3 className="my-5 text-center">{gameQuiz[step].question}</h3>
+            <ul className="flex flex-col gap-2 border-pink-300 border-1 bg-pink-800 h-1/2 justify-center px-3">
+                {gameQuiz && gameQuiz[step].alternatives.map((item: string, index: number) =>
+                    <li className={`border border-pink-400  text-center flex items-center justify-center ${!answer ? 'bg-pink-600' : index === gameQuiz[step].answer ? 'bg-pink-300 text-pink-900' : 'bg-pink-700 text-pink-100'}`} key={index}>
+                        <button disabled={answer} onClick={() => onClick(index)} className="cursor-pointer grow h-15">{item}</button>
+                    </li>
+                )}
+            </ul>
+        </>
+    )
+}
+
+export default QuizArea;
