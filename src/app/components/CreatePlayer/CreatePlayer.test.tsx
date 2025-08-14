@@ -14,14 +14,14 @@ describe('button tests', () => {
     })
 
     test('should render a disabled Start button if input is less than 3', () => {
-        const inputTextMock = 'p'.repeat(2);
+        const inputTextMock:string = 'p'.repeat(2);
         render(<CreatePlayer setPlayer={() => { }} />)
 
         const startBtn:HTMLElement = screen.getByRole('button', { name: /start game/i });
-        const input:HTMLInputElement = screen.getByLabelText(/pick a name/i) as HTMLInputElement;
+        const input:HTMLInputElement = screen.getByLabelText(/pick a name/i);
         fireEvent.change(input, { target: { value: inputTextMock } })
 
-        expect(input.value).toBe('pp');
+        expect(input.value).toBe(inputTextMock);
         expect(startBtn).toBeDisabled();
     })
 
@@ -30,10 +30,10 @@ describe('button tests', () => {
         render(<CreatePlayer setPlayer={() => { }} />)
 
         const startBtn:HTMLElement = screen.getByRole('button', { name: /start game/i });
-        const input:HTMLInputElement = screen.getByLabelText(/pick a name/i) as HTMLInputElement;
+        const input:HTMLInputElement = screen.getByLabelText(/pick a name/i);
         fireEvent.change(input, { target: { value: inputTextMock } })
 
-        expect(input.value).toBe('ppp');
+        expect(input.value).toBe(inputTextMock);
         expect(startBtn).not.toBeDisabled();
     })
 
@@ -44,17 +44,18 @@ describe('input tests', () => {
     test('should render a input component with empty default value', () => {
         render(<CreatePlayer setPlayer={() => { }} />)
 
-        const input:HTMLInputElement = screen.getByLabelText(/pick a name/i) as HTMLInputElement;
+        const input:HTMLInputElement = screen.getByLabelText(/pick a name/i);
 
+        expect(input).toBeInTheDocument();
         expect(input.value).toBe('');
     })
 
-    test('input can only take 15 characters', async () => {
+    test('should only take 15 characters in inputfield', async () => {
         const inputTextMock:string = '1'.repeat(20);
         const user:UserEvent = userEvent.setup();
         render(<CreatePlayer setPlayer={() => { }} />)
 
-        let input:HTMLInputElement = screen.getByLabelText(/pick a name/i) as HTMLInputElement;
+        let input:HTMLInputElement = screen.getByLabelText(/pick a name/i);
         await user.type(input, inputTextMock);
 
         expect(input.value.length).toBe(15);

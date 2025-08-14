@@ -1,5 +1,6 @@
 import { screen, render } from '@testing-library/react';
-import Result, { IResult } from '.';
+import Result from '.';
+import { IResult } from '@/interfaces/interfaces';
 
 test('should render a text of score result', () => {
     const mockData: IResult = {
@@ -9,7 +10,7 @@ test('should render a text of score result', () => {
     }
     render(<Result rightAnswers={mockData.rightAnswers} amountOfAnswers={mockData.amountOfAnswers} onClick={() => { }} />)
 
-    const scoreText = screen.getByText(/right answers!/i)
+    const scoreText:HTMLElement = screen.getByText(/right answers!/i)
 
     expect(scoreText).toBeInTheDocument();
     expect(scoreText.textContent).toContain(`${mockData.rightAnswers}`);
@@ -24,7 +25,7 @@ test("should render a 'Play again' button", () => {
     }
     render(<Result rightAnswers={mockData.rightAnswers} amountOfAnswers={mockData.amountOfAnswers} onClick={() => { }} />)
 
-    const btn = screen.getByRole('button', { name: /Play again/i })
+    const btn:HTMLButtonElement = screen.getByRole('button', { name: /Play again/i })
 
     expect(btn).toBeInTheDocument();
 })

@@ -1,10 +1,5 @@
+import { IResult } from "@/interfaces/interfaces";
 import { ReactElement } from "react";
-
-export interface IResult {
-    rightAnswers: number,
-    amountOfAnswers: number,
-    onClick: () => void
-}
 
 const Result = ({ rightAnswers, amountOfAnswers, onClick }: IResult): ReactElement => {
     return (

@@ -1,10 +1,5 @@
-import { IQuizSet } from "@/interfaces/interfaces";
+import { IProgressBar } from "@/interfaces/interfaces";
 import { ReactElement } from "react";
-
-interface IProgressBar {
-    step: number,
-    gameQuiz: IQuizSet[]
-}
 
 const ProgressBar = ({ step, gameQuiz }: IProgressBar): ReactElement => {
     return (
