@@ -6,12 +6,12 @@ import { IQuizSet } from '@/interfaces/interfaces';
 describe('progress bar tests', () => {
     test('should render a progress bar', () => {
         render(<ProgressBar step={0} gameQuiz={[]} />)
-    
+
         const progressEl: HTMLProgressElement = screen.getByRole('progressbar');
-    
+
         expect(progressEl).toBeInTheDocument();
     })
-    
+
     test('should render a value and maxValue according to data', () => {
         const mockData: IQuizSet = {
             question: 'question',
@@ -21,9 +21,9 @@ describe('progress bar tests', () => {
         const step: number = 2;
         const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
         render(<ProgressBar step={step} gameQuiz={mockGameSet} />)
-    
+
         const progresEl: HTMLProgressElement = screen.getByRole('progressbar');
-    
+
         expect(progresEl.value).toBe(step);
         expect(progresEl.max).toBe(mockGameSet.length);
     })
@@ -39,9 +39,9 @@ describe('text/paragraph tests', () => {
         const step: number = 2;
         const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
         render(<ProgressBar step={step} gameQuiz={mockGameSet} />)
-    
+
         const textEl: HTMLElement = screen.getByText(`${2} / ${mockGameSet.length}`)
-    
+
         expect(textEl).toBeInTheDocument();
         expect(textEl.textContent).toBe(`${step} / ${mockGameSet.length}`)
     })

@@ -71,7 +71,7 @@ describe('list buttons (alternatives)', () => {
         altItems.forEach((item) => expect(within(item).getByRole('button')).not.toBeDisabled())
     })
 
-        test('buttons should be disabled if answered', () => {
+    test('buttons should be disabled if answered', () => {
         const mockData: IQuizSet = {
             question: 'question',
             answer: 0,
