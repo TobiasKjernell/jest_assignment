@@ -34,9 +34,7 @@ const GameBoard = ({ player }: { player: string }): ReactElement => {
         <main className="w-[400px] h-[600px] bg-pink-800 text-pink-200 shadow-2xl shadow-black">
             <GameHeader player={player} />
             {gameQuiz.length === step ?
-                <>
                     <Result rightAnswers={rightAnswers} amountOfAnswers={gameQuiz.length} onClick={handlePlayAgain} />
-                </>
                 :
                 <>
                     <ProgressBar step={step} gameQuiz={gameQuiz} />
@@ -44,7 +42,6 @@ const GameBoard = ({ player }: { player: string }): ReactElement => {
                     <NextBtn answer={answer} step={step} onClick={handleStep} gameQuiz={gameQuiz} />
                 </>
             }
-
         </main>
     )
 }
