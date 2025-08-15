@@ -11,11 +11,10 @@ test('should have a game title with: "Coffee Quiz"', () => {
 
 test("should render text of the player's name (prefix: 'Player: '", () => {
     const mockPlayerName = 'tobias'
-    const resultText = 'Player: ' + mockPlayerName;
     render(<GameHeader player={mockPlayerName} />)
 
-    const playerTextEl: HTMLElement = screen.getByText(resultText);
+    const playerTextEl: HTMLElement = screen.getByText(mockPlayerName);
 
     expect(playerTextEl).toBeInTheDocument();
-    expect(playerTextEl.textContent).toBe(resultText);
+    expect(playerTextEl.textContent).toBe(mockPlayerName);
 })

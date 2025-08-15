@@ -86,5 +86,39 @@ describe('list buttons (alternatives)', () => {
         expect(altItems.length).toEqual(mockGameSet[step].alternatives.length);
         altItems.forEach((item) => expect(within(item).getByRole('button')).toBeDisabled())
     })
+
+    test('should render default color on alternative-items', () => {
+        const mockData: IQuizSet = {
+            question: 'question',
+            answer: 0,
+            alternatives: ['1', '2', '3', '4']
+        }
+        const step: number = 2;
+        const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
+        render(<QuizArea gameQuiz={mockGameSet} step={step} answer={false} onClick={(): void => { }} />);
+
+        const altItems: HTMLElement[] = screen.queryAllByTestId('alternative-item');
+
+        expect(altItems[0]).toHaveClass('idle');
+    })
+
+    test("should render 'wrong' color and 'correct' when got an answer on alternative-items", () => {
+        const mockData: IQuizSet = {
+            question: 'question',
+            answer: 0,
+            alternatives: ['1', '2', '3', '4']
+        }
+        const step: number = 2;
+        const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
+        render(<QuizArea gameQuiz={mockGameSet} step={step} answer={true} onClick={(): void => { }} />);
+
+        const altItems: HTMLElement[] = screen.queryAllByTestId('alternative-item');
+
+        altItems.forEach(
+            (item, index) => index === mockData.answer
+                ? expect(item).toHaveClass('correct')
+                : expect(item).toHaveClass('wrong')
+        )
+    })
 })
 

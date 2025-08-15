@@ -6,8 +6,23 @@
         &::-webkit-progress-bar {
             background-color: oklch(59.2% 0.249 0.584);
         }
+
         &::-webkit-progress-value {
             background-color: oklch(89.9% 0.061 343.231)
         }
+    }
+
+    .correct {
+        background-color: oklch(82.3% 0.12 346.018);
+        color: oklch(40.8% 0.153 2.432);
+    }
+
+    .wrong {
+        background-color: oklch(59.2% 0.249 0.584);
+    }
+
+    .idle {
+        background-color: oklch(52.5% 0.223 3.958);
+        color: oklch(94.8% 0.028 342.258);
     }
 }
