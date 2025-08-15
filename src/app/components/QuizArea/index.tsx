@@ -15,7 +15,7 @@ const QuizArea = ({ answer, step, gameQuiz, onClick }: IQuizArea): ReactElement 
             <h3 className="my-5 text-center">{gameQuiz[step].question}</h3>
             <ul className="flex flex-col gap-2 border-pink-300 border-t-1 border-b-1 bg-pink-800 h-1/2 justify-center px-3">
                 {gameQuiz && gameQuiz[step].alternatives.map((item: string, index: number) =>
-                    <li className={`border border-pink-400  text-center flex items-center justify-center ${!answer ? 'bg-pink-600' : index === gameQuiz[step].answer ? 'bg-pink-300 text-pink-900' : 'bg-pink-700 text-pink-100'}`} key={index}>
+                    <li data-testid='alternative-item' className={`border border-pink-400  text-center flex items-center justify-center ${!answer ? 'bg-pink-600' : index === gameQuiz[step].answer ? 'bg-pink-300 text-pink-900' : 'bg-pink-700 text-pink-100'}`} key={index}>
                         <button disabled={answer} onClick={() => onClick(index)} className="cursor-pointer grow h-15">{item}</button>
                     </li>
                 )}

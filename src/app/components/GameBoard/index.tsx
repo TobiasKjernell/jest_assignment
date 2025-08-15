@@ -13,13 +13,13 @@ const GameBoard = ({ player }: { player: string }): ReactElement => {
 
     const handleAnswer = (answerOption: number): void => {
         if (answerOption === gameQuiz[step].answer) {
-            setRightAnswers(state => state + 1);
+            setRightAnswers(rightAnswers + 1);
         }
         setAnswer(true);
     }
 
     const handleStep = (): void => {
-        setStep(state => state + 1);
+        setStep(step + 1);
         setAnswer(false);
     }
 
