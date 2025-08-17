@@ -12,7 +12,7 @@ test("should render a GameHeader component", () => {
 })
 
 
-test("should render 'ProgressBar' component if not done with quiz", () => {
+test("should render 'ProgressBar' component", () => {
     render(<GameBoard player={'test user'} />)
 
     const progressEl: HTMLProgressElement = screen.queryByRole('progressbar') as HTMLProgressElement;
@@ -21,22 +21,13 @@ test("should render 'ProgressBar' component if not done with quiz", () => {
     expect(progressEl).toBeVisible();
 })
 
-test("should render 'QuizArena' component if not done with quiz", () => {
+test("should render 'QuizArena' component ", () => {
     render(<GameBoard player={'test user'} />)
 
     const listItems: HTMLElement[] = screen.getAllByTestId('alternative-item');
 
     expect(listItems[0]).toBeInTheDocument();
     expect(listItems[0]).toBeVisible();
-})
-
-test("should render 'NextBtn' component with text 'Next' if not on last step", () => {
-    render(<GameBoard player={'test user'} />)
-
-    const nxtBtn: HTMLButtonElement = screen.getByRole('button', { name: 'Next' })
-
-    expect(nxtBtn).toBeInTheDocument();
-    expect(nxtBtn.textContent).toBe('Next');
 })
 
 test("should render disabled 'Alternatives' item when one of them is clicked", () => {
@@ -143,7 +134,7 @@ test("should render correct values in result after a full-game.", () => {
     })
 
     expect(nextBtn.textContent).toBe('See result');
-    
+
     fireEvent.click(nextBtn);
 
     expect(nextBtn).not.toBeInTheDocument();
@@ -157,7 +148,7 @@ test("should render correct values in result after a full-game.", () => {
 
 })
 
-test("should render a 'new interation' when clicking on 'Play again button' and hides 'Result'", () => {
+test("should render a 'new game' when clicking on 'Play again button' and hides 'Result'", () => {
     render(<GameBoard player={'test user'} />)
 
     let listItems: HTMLElement[] = screen.queryAllByTestId('alternative-item');
@@ -195,5 +186,53 @@ test("should render a 'new interation' when clicking on 'Play again button' and 
     expect(listItems[0]).toBeInTheDocument();
     expect(questionEl.textContent).toBe(gameQuiz[0].question);
 
+})
+
+test("should render 'NextBtn' component with text 'Next' if not on last step", () => {
+    render(<GameBoard player={'test user'} />)
+
+    let nxtBtn: HTMLButtonElement = screen.getByRole('button', { name: 'Next' })
+    let listItems: HTMLElement[] = screen.queryAllByTestId('alternative-item');
+    let altBtn: HTMLButtonElement = within(listItems[0]).getByRole('button');
+
+    Array.from({ length: gameQuiz.length }).forEach((_, i) => {
+        listItems = screen.queryAllByTestId('alternative-item');
+        altBtn = within(listItems[0]).getByRole('button');
+
+
+        if (gameQuiz.length - 1 === i) {
+            let nxtBtn: HTMLButtonElement = screen.getByRole('button', { name: 'See result' })
+            expect(nxtBtn.textContent).toBe('See result')
+
+        } else {
+            let nxtBtn: HTMLButtonElement = screen.getByRole('button', { name: 'Next' })
+            expect(nxtBtn.textContent).toBe('Next')
+
+        }
+
+        fireEvent.click(altBtn);
+        fireEvent.click(nxtBtn);
+
+    })
+
+})
+
+test("should render updated progress-bar each step", () => {
+    render(<GameBoard player={'test user'} />)
+
+    let listItems: HTMLElement[] = screen.queryAllByTestId('alternative-item');
+    let altBtn: HTMLButtonElement = within(listItems[0]).getByRole('button');
+    const nextBtn: HTMLButtonElement = screen.getByRole('button', { name: 'Next' })
+    const progressEl: HTMLProgressElement = screen.queryByRole('progressbar') as HTMLProgressElement;
+
+    Array.from({ length: gameQuiz.length - 1 }).forEach((_, i) => {
+        listItems = screen.queryAllByTestId('alternative-item');
+        altBtn = within(listItems[0]).getByRole('button');
+        expect(progressEl.value).toBe(i);
+        fireEvent.click(altBtn);
+        fireEvent.click(nextBtn);
+    })
+
+    expect(progressEl.value).toBe(gameQuiz.length-1);
 })
 
