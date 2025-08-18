@@ -2,13 +2,15 @@ import { screen, render, within } from '@testing-library/react';
 import QuizArea from '.';
 import { IQuizSet } from '@/interfaces/interfaces';
 
+const mockData: IQuizSet = {
+    question: 'question',
+    answer: 0,
+    alternatives: ['1', '2', '3', '4']
+}
+const step: number = 2;
+
 test('should render a text with question-data', () => {
-    const mockData: IQuizSet = {
-        question: 'question',
-        answer: 0,
-        alternatives: ['alternative']
-    }
-    const step: number = 2;
+
     const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
     render(<QuizArea gameQuiz={mockGameSet} step={step} answer={false} onClick={(): void => { }} />)
 
@@ -21,12 +23,7 @@ test('should render a text with question-data', () => {
 describe('list buttons (alternatives)', () => {
 
     test("should render amount 'alternatives'-buttons equal to alternative length", () => {
-        const mockData: IQuizSet = {
-            question: 'question',
-            answer: 0,
-            alternatives: ['alternative', 'alternative', 'alternative', 'alternative',]
-        }
-        const step: number = 2;
+
         const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
         render(<QuizArea gameQuiz={mockGameSet} step={step} answer={false} onClick={(): void => { }} />);
 
@@ -39,12 +36,7 @@ describe('list buttons (alternatives)', () => {
     });
 
     test("should render button-text according to button-alternative", () => {
-        const mockData: IQuizSet = {
-            question: 'question',
-            answer: 0,
-            alternatives: ['1', '2', '3', '4']
-        }
-        const step: number = 2;
+
         const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
         render(<QuizArea gameQuiz={mockGameSet} step={step} answer={false} onClick={(): void => { }} />);
 
@@ -56,12 +48,7 @@ describe('list buttons (alternatives)', () => {
     })
 
     test('buttons should be enabled as default', () => {
-        const mockData: IQuizSet = {
-            question: 'question',
-            answer: 0,
-            alternatives: ['1', '2', '3', '4']
-        }
-        const step: number = 2;
+
         const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
         render(<QuizArea gameQuiz={mockGameSet} step={step} answer={false} onClick={(): void => { }} />);
 
@@ -72,12 +59,7 @@ describe('list buttons (alternatives)', () => {
     })
 
     test('buttons should be disabled if answered', () => {
-        const mockData: IQuizSet = {
-            question: 'question',
-            answer: 0,
-            alternatives: ['1', '2', '3', '4']
-        }
-        const step: number = 2;
+ 
         const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
         render(<QuizArea gameQuiz={mockGameSet} step={step} answer={true} onClick={(): void => { }} />);
 
@@ -88,12 +70,7 @@ describe('list buttons (alternatives)', () => {
     })
 
     test('should render default color on alternative-items', () => {
-        const mockData: IQuizSet = {
-            question: 'question',
-            answer: 0,
-            alternatives: ['1', '2', '3', '4']
-        }
-        const step: number = 2;
+
         const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
         render(<QuizArea gameQuiz={mockGameSet} step={step} answer={false} onClick={(): void => { }} />);
 
@@ -103,12 +80,7 @@ describe('list buttons (alternatives)', () => {
     })
 
     test("should render 'wrong' color and 'correct' when got an answer on alternative-items", () => {
-        const mockData: IQuizSet = {
-            question: 'question',
-            answer: 0,
-            alternatives: ['1', '2', '3', '4']
-        }
-        const step: number = 2;
+ 
         const mockGameSet: IQuizSet[] = [mockData, mockData, mockData, mockData]
         render(<QuizArea gameQuiz={mockGameSet} step={step} answer={true} onClick={(): void => { }} />);
 
